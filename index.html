@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sciedutech.id — Growth and Create</title>
+
+  <!-- Basic styling (embedded supaya cukup 1 file) -->
+  <style>
+    :root{
+      --bg:#0b1220; --card:#0f1a2a; --accent:#29a8ff; --muted:#9fb0c8; --glass: rgba(255,255,255,0.03);
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(180deg,#071022 0%, #071827 100%);
+      color:#e6f0fb;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding-bottom:60px;
+    }
+    .site {
+      max-width: var(--maxw);
+      margin: 28px auto;
+      padding: 20px;
+    }
+
+    header{
+      display:flex;
+      gap:18px;
+      align-items:center;
+      padding:18px;
+      background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      box-shadow: 0 6px 24px rgba(2,6,23,0.6);
+      margin-bottom:18px;
+    }
+    .logo {
+      width:84px; height:84px; object-fit:contain; background:var(--glass); border-radius:10px; padding:8px;
+    }
+    .site-title { font-size:1.6rem; margin:0; letter-spacing:0.2px }
+    .site-sub { margin:4px 0 0 0; color:var(--muted); font-size:0.95rem }
+
+    main { display:grid; grid-template-columns: 1fr; gap:18px; }
+
+    .hero {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:16px; border-radius:10px;
+    }
+
+    .news-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+      gap:14px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      border-radius:10px; padding:14px;
+      box-shadow: 0 4px 16px rgba(2,6,23,0.55);
+      min-height:150px;
+    }
+
+    .card h3{margin:0 0 10px 0; font-size:1.02rem}
+    .item { display:block; padding:8px 6px; margin:6px 0; border-radius:6px; text-decoration:none; color:var(--accent); background:transparent; transition:all .12s ease-in-out }
+    .item small { display:block; color:var(--muted); font-size:0.82rem; margin-top:6px }
+    .item:hover{ transform:translateY(-3px); color:#fff; background: rgba(255,255,255,0.01) }
+
+    .section-title{ font-weight:600; color:#dff3ff; margin-bottom:8px; display:flex; gap:8px; align-items:center }
+    .section-sub{ color:var(--muted); font-size:0.95rem }
+
+    .kursus {
+      padding:14px; border-radius:10px; background:linear-gradient(90deg, rgba(41,168,255,0.05), rgba(41,168,255,0.02));
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+
+    footer{
+      max-width:var(--maxw);
+      margin: 28px auto 48px auto;
+      text-align:center; color:var(--muted); font-size:0.92rem;
+    }
+
+    /* tiny responsive tweaks */
+    @media (max-width:520px){
+      header{flex-direction:row; gap:12px}
+      .site-title{font-size:1.15rem}
+    }
+
+    /* loading / error */
+    .muted { color: var(--muted); font-size:0.95rem }
+    .small { font-size:0.85rem }
+  </style>
+</head>
+<body>
+  <div class="site">
+
+    <!-- HEADER -->
+    <header>
+      <!-- Upload logo file ke /logo/logo.png di repo -->
+      <img src="logo/logo.png" alt="Sciedutech Logo" class="logo" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2284%22 height=%2284%22><rect width=%22100%25%22 height=%22100%25%22 fill=%22%230b1220%22/><text x=%2250%25%22 y=%2250%25%22 fill=%22%239fb0c8%22 font-size=%2210%22 font-family=%22Arial%22 dominant-baseline=%22middle%22 text-anchor=%22middle%22>logo.png</text></svg>'" />
+      <div>
+        <h1 class="site-title">Sciedutech.id</h1>
+        <div class="site-sub">Growth and Create</div>
+      </div>
+    </header>
+
+    <!-- HERO / Intro -->
+    <main>
+      <section class="hero card">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap">
+          <div>
+            <div class="section-title">Berita Terkini <span class="small" style="color:var(--muted); font-weight:400">— otomatis dari sumber</span></div>
+            <div class="section-sub">Sains: SciTechDaily • Kripto: Investing.com (feed mirror) • Teknologi: NVIDIA</div>
+          </div>
+          <div class="muted small">Last update: <span id="lastUpdate">—</span></div>
+        </div>
+      </section>
+
+      <!-- NEWS GRID -->
+      <section class="news-grid">
+        <div class="card">
+          <h3>Berita Sains</h3>
+          <div id="science" class="muted">Memuat...</div>
+        </div>
+
+        <div class="card">
+          <h3>Berita Kripto</h3>
+          <div id="crypto" class="muted">Memuat...</div>
+        </div>
+
+        <div class="card">
+          <h3>Berita Teknologi</h3>
+          <div id="tech" class="muted">Memuat...</div>
+        </div>
+      </section>
+
+      <!-- KURSUS -->
+      <section class="card kursus" style="margin-top:12px">
+        <div>
+          <div style="font-weight:700">Kursus Gratis</div>
+          <div class="small muted">Menyusul — sedang disiapkan. Nantikan materi pembelajaran & workshop.</div>
+        </div>
+        <div style="text-align:right">
+          <button style="background:var(--accent); color:#031022; border:none; padding:10px 14px; border-radius:8px; font-weight:600; cursor:default">Segera Hadir</button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer>
+    &copy; <span id="year"></span> Sciedutech.id — Growth and Create | Sumber berita: SciTechDaily, Investing.com, NVIDIA
+  </footer>
+
+  <!-- SCRIPT: ambil RSS via CORS proxy (allorigins) -->
+  <script>
+    /* -------------------------
+       Instruksi singkat pengguna:
+       - Simpan file ini sebagai index.html di root repo.
+       - Upload logo ke path: /logo/logo.png
+       - Aktifkan GitHub Pages: Settings -> Pages -> Deploy from branch: main, folder: root
+       -------------------------- */
+
+    // helper untuk fetch RSS via allorigins (agar terhindar blokir CORS di banyak kasus)
+    // allorigins API: https://api.allorigins.win/raw?url=<ENCODED_URL>
+    // jika allorigins down, alternatif server-side lebih stabil.
+    function corsProxyUrl(url){
+      return 'https://api.allorigins.win/raw?url=' + encodeURIComponent(url);
+    }
+
+    // sumber feed (RSS)
+    const FEEDS = {
+      science: "https://www.scitechdaily.com/feed/",
+      // Investing.com tidak menyediakan RSS resmi untuk semua regional; di sini kita coba gunakan mirror/feed generator.
+      // Jika feed ini tidak bekerja, kamu perlu mengganti dengan feed mirror yang valid atau pakai server-side scrape.
+      crypto: "https://rss.app/feeds/zt1Ai5bbZFBG7SDw.xml",
+      // NVIDIA RSS: beberapa endpoint mereturn XML. Kita coba endpoint umum.
+      tech: "https://www.nvidia.com/en-us/rss/"
+    };
+
+    // util parse dan render
+    async function fetchAndParseRSS(label, feedUrl, limit = 6){
+      const container = document.getElementById(label);
+      container.innerHTML = '<div class="muted">Memuat...</div>';
+      try {
+        const res = await fetch(corsProxyUrl(feedUrl));
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const text = await res.text();
+        // parse XML
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(text, "application/xml");
+        // some feeds use <entry> (atom) or <item> (rss)
+        const items = xml.querySelectorAll("item, entry");
+        if (!items || items.length === 0) {
+          container.innerHTML = '<div class="muted small">Feed tidak berisi item atau feed diblokir oleh sumber.</div>';
+          console.warn('No items found for', feedUrl, xml);
+          return [];
+        }
+
+        // build html
+        const frag = document.createDocumentFragment();
+        let count = 0;
+        items.forEach((it) => {
+          if (count >= limit) return;
+          // title
+          let titleEl = it.querySelector("title");
+          let linkEl = it.querySelector("link");
+          let dateEl = it.querySelector("pubDate") || it.querySelector("updated") || it.querySelector("published");
+          let title = titleEl ? titleEl.textContent.trim() : "(tanpa judul)";
+          // link handling: some atom feeds put link as <link href="..."/>
+          let link = "#";
+          if (linkEl) {
+            // if <link> has href attribute
+            if (linkEl.getAttribute && linkEl.getAttribute("href")) link = linkEl.getAttribute("href");
+            else link = linkEl.textContent.trim();
+          } else {
+            // try atom-style links
+            const alt = it.querySelector("link[rel='alternate']") || it.querySelector("link[type='text/html']");
+            if (alt && alt.getAttribute) link = alt.getAttribute("href") || "#";
+          }
+          const li = document.createElement("a");
+          li.className = "item";
+          li.href = link;
+          li.target = "_blank";
+          li.rel = "noopener noreferrer";
+          // display title and small metadata
+          li.innerHTML = `<div>${escapeHtml(title)}</div><small>${dateEl ? escapeHtml(dateEl.textContent.trim()) : ''}</small>`;
+          frag.appendChild(li);
+          count++;
+        });
+
+        container.innerHTML = '';
+        container.appendChild(frag);
+        return items;
+      } catch (err) {
+        console.error('Error fetching feed', feedUrl, err);
+        container.innerHTML = '<div class="muted small">Gagal memuat feed (mungkin diblokir oleh server sumber atau proxy tidak tersedia).</div>';
+        return null;
+      }
+    }
+
+    // utility untuk escape user-supplied text into HTML
+    function escapeHtml(s){
+      if(!s) return '';
+      return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+    }
+
+    // main load
+    (async function(){
+      document.getElementById('year').textContent = (new Date()).getFullYear();
+      const started = new Date();
+      // Jalankan paralel
+      await Promise.all([
+        fetchAndParseRSS('science', FEEDS.science, 6),
+        fetchAndParseRSS('crypto', FEEDS.crypto, 6),
+        fetchAndParseRSS('tech', FEEDS.tech, 6)
+      ]);
+      document.getElementById('lastUpdate').textContent = new Date().toLocaleString();
+      console.log('Feeds loaded in', (new Date()) - started, 'ms');
+    })();
+  </script>
+
+  <!--
+    PENJELASAN & TROUBLESHOOTING (baca kalau berita tidak muncul):
+
+    1) CORS / Feed blocked:
+       - Banyak website tidak mengizinkan fetch langsung dari browser (CORS). Kita memakai "allorigins" (api.allorigins.win) sebagai proxy.
+         Jika allorigins sedang down atau dibatasi oleh GitHub Pages, feed mungkin gagal.
+       - Solusi terbaik: sediakan small server-side proxy (mis. Cloudflare Worker, Vercel serverless, atau GitHub Actions job) yang mengambil RSS lalu menyajikannya tanpa CORS.
+       - Contoh service gratis untuk prototyping: https://api.allorigins.win/raw?url=<FEED_URL>
+
+    2) Investing.com:
+       - Investing.com seringkali tidak punya RSS regional yang mudah diakses. Saya gunakan rss.app mirror di FEEDS.crypto.
+       - Jika feed kripto tidak muncul, ganti FEEDS.crypto dengan URL RSS mirror atau feed pihak ketiga yang valid.
+
+    3) Jika kamu mau stable production:
+       - Gunakan server-side scheduler (mis. GitHub Action) untuk fetch RSS, transform menjadi JSON static, commit ke repo (atau upload ke storage), lalu halaman statis membaca JSON tersebut — ini menghindari CORS dan menjamin konten selalu tersedia.
+
+    4) Upload logo:
+       - Pastikan file logo kamu ada di path /logo/logo.png (case-sensitive).
+       - Jika tidak ada, placeholder SVG akan tampil.
+
+    5) Setelah upload:
+       - Aktifkan GitHub Pages: Settings -> Pages -> Deploy from branch: main -> folder: root
+       - Jika halaman masih menampilkan README atau 404, pastikan `index.html` ada di root dan branch Pages sesuai.
+
+    Butuh saya bantu cek repo yang sudah kamu upload? Tinggal bilang "cek repo" dan saya bantu memeriksa struktur (kamu beri link repo publik).
+  -->
+</body>
+</html>
